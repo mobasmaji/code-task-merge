@@ -10,6 +10,10 @@ import { MResponse, RequestStatus } from "../utils/MResponse";
 export const parseIntervalFromString = (input: string): MResponse<Interval[]> => {
     let splittedString = input.split("]");
 
+    // if the end of the array is NOT empty string, then there is a missing bracket at the end
+    if(!splittedString.includes("")) {
+        return new MResponse({ status: RequestStatus.ERROR, error: "Missing brackets" });
+    }
     // after splitting the string at ']', the last element is an empty string and is not needed
     splittedString.pop(); 
 
@@ -42,6 +46,10 @@ export const parseIntervalFromString = (input: string): MResponse<Interval[]> =>
 
         if (interval.start > interval.end) {
             return new MResponse({ status: RequestStatus.ERROR, error: "start should not be greater than end" });
+        }
+
+        if (isNaN(interval.start) || isNaN(interval.end)) {
+            return new MResponse({ status: RequestStatus.ERROR, error: "start or end are not a number" });
         }
 
         intervals.push(interval);
