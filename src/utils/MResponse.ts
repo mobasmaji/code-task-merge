@@ -4,6 +4,13 @@ export enum RequestStatus {
     ERROR = "ERROR",
 }
 
+/**
+ * A generic helper class to manage communication inside the programm.
+ * When creating a response, either data or error should be provided. 
+ * When providing both, only the error will be handled.
+ * When receiving a response, first check if it is ok by calling isOk(),
+ * then call getData() or getError() according to the check
+ */
 export class MResponse<T> {
 
     private status: RequestStatus;
