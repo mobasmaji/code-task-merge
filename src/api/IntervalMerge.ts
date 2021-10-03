@@ -1,11 +1,21 @@
 import { Interval } from "../utils/Interval";
 
 
+
+/**
+ * An function to merge intervals based on the following algorithm:
+ * Sort intervals accodring to their start number. Add the first intervals to a stack,
+ * then compare the top of the stack with the new interval. 
+ * If overlapping then merge, if containing each other then delete the smaller one.
+ * Else Just add the new interval.
+ * @param intervals intervals to merge
+ * @returns An array of Interval containing the merged intervals
+ */
 export const mergeIntervals = (intervals: Interval[]): Interval[] => {
 
     // In typescript a stack can be emulated with push and pop
     const mergedIntervals: Interval[] = [];
-    // First sort the array of intervals according to their start
+    // First sort the array
     const sortedIntervals: Interval[] = intervals.sort((a, b) => a.start - b.start);
     
     // Compare each new coming interval with the top of the merged intervals. Merge if overlapping.
