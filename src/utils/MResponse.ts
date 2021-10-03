@@ -10,6 +10,17 @@ export class MResponse<T> {
     private data?: T;
     private error?: string;
 
+    constructor(config: {
+        status: RequestStatus,
+        data?: T,
+        error?: string
+    }
+    ) {
+        this.status = config.status;
+        this.data = config.data;
+        this.error = config.error;
+    }
+
     public getStatus(): RequestStatus {
         return this.status;
     }
